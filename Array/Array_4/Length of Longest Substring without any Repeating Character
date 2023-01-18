@@ -1,0 +1,82 @@
+//Length of Longest Substring without any Repeating Character
+
+Problem Statement: 
+Given a String, find the length of longest substring without any repeating character.
+
+Input: s = ”abcabcbb”
+Output: 3
+Explanation: The answer is abc with length of 3.
+
+import java.util.*;
+public class LongestSS {
+    public static void main(String[] args){
+       String s="abcabcbb";
+       System.out.println(lengthLongestSubStringW2("bbb"));
+}
+
+//O(n^2)
+
+    static int lengthLongestSubStringW(String s){
+        if(s.length()==0){
+            return 0;
+        }
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<s.length();i++){
+            HashSet<Character> set=new HashSet<Character>();
+            for(int j=i;j<s.length();j++){
+              if(set.contains(s.charAt(j))){
+                max=Math.max(max,j-i);
+                break;
+              }
+              set.add(s.charAt(j));
+            }
+        }
+        return max;
+    }
+    
+    
+ // O(nlog(n))
+    
+    static int lengthLongestSubStringW1(String s){
+        if(s.length()==0){
+            return 0;
+        }
+        HashSet<Character> set=new HashSet<Character>();  
+        int max=Integer.MIN_VALUE;
+        int l=0;
+        for(int i=0;i<s.length();i++){
+        if(set.contains(s.charAt(i))){
+            while(l<i&&set.contains(s.charAt(i))){
+                set.remove(s.charAt(l));
+              l++;
+            }}
+            set.add(s.charAt(i));
+            max=Math.max(max,i-l+1);
+        
+}
+    return max;
+}
+
+
+//O(n)
+
+
+static int lengthLongestSubStringW2(String s){
+    if(s.length()==0){
+        return 0;
+    }
+int max=Integer.MIN_VALUE;
+int l=0,r=0,n=s.length();
+HashMap<Character,Integer> map=new HashMap<Character,Integer>();
+while(r<n){
+if(map.containsKey(s.charAt(r))){
+    l=Math.max(l,map.get(s.charAt(r))+1);
+}
+map.put(s.charAt(r),r);
+max=Math.max(max,r-l+1);
+r++;
+}
+return max;
+}     
+}
+
