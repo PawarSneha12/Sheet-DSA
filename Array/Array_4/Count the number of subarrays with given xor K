@@ -1,0 +1,56 @@
+//Count the number of subarrays with given xor K
+
+Problem Statement: Given an array of integers A and an integer B. Find the total number 
+of subarrays having bitwise XOR of all elements equal to B.
+
+Input Format:  A = [4, 2, 2, 6, 4] , B = 6
+Result: 4
+Explanation: The subarrays having XOR of their elements as 6 are  [4, 2], [4, 2, 2, 6, 4], [2, 2, 6], [6]
+
+//main method
+import java.util.*; 
+public class SubArrayXorCount {
+public static void main(String[] args){
+int[] arr={5, 6, 7, 8, 9};
+System.out.println(countXorSubArray1(arr,5));
+}
+
+
+//bruth force approach
+
+  static  int countXorSubArray(int[] arr,int b){
+    int c=0;
+    for(int i=0;i<arr.length;i++){
+        int xor=0;
+        for(int j=i;j<arr.length;j++){
+  xor^=arr[j];
+        
+        if(xor==b){
+            c++;
+        }}
+    }
+ return c;
+   }
+   
+   //optimal approach
+    
+static  int countXorSubArray1(int[] arr,int b){
+    HashMap<Integer,Integer> hm=new HashMap<Integer,Integer>();
+    int c=0;
+    int xor=0;
+    for(int i=0;i<arr.length;i++){
+xor^=arr[i];
+if(hm.get(xor^b)!=null){
+    c+=hm.get(xor^b);
+}
+if(xor==b){
+    c++;
+}
+if(hm.get(xor)!=null){
+    hm.put(xor,hm.get(xor)+1);
+}
+else{
+    hm.put(xor,1);
+}}
+return c;   
+}}
