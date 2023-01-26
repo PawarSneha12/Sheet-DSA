@@ -1,0 +1,155 @@
+//Using Array
+
+class queue{
+    int size,s,e,cur,maxS;
+    int[]arr;
+    public queue(int ms) {
+this.maxS=ms;
+arr=new int[ms];
+s=-1;
+e=-1;
+cur=0;
+ }
+
+public  void add(int x){
+    if(maxS==cur) {
+        System.out.println("Queue is full");
+        return;
+    }
+    if(e==-1){
+        s=0;
+        e=0;
+    }
+    else{
+        e=(e+1)%maxS;
+    }
+    arr[e]=x;
+    cur++;
+}
+
+int remove(){
+    if(s==-1){
+        System.out.println("Queue empty");
+        return -1;
+    }
+    int x=arr[s];
+    if(cur==1){
+        s=-1;
+        e=-1;
+    }
+    else{
+        s=(s+1)%maxS;
+  }
+cur--;
+return x;
+}
+int peek(){
+    if(s==-1){
+        System.out.println("Queue empty");
+        return -1;
+    }
+return arr[s];
+}
+int size(){
+    return cur;}}
+
+
+
+//Using Two Stack
+class qu{
+    Stack input=new Stack();
+    Stack output=new Stack();
+    public qu(){
+}
+public void add(int x){
+    input.push(x);
+}
+public int remove(){
+    if(output.empty()==true){
+        while(input.empty()==false){
+            output.push(input.pop());
+        }}
+        int x=(int)output.pop();
+        return x;
+}
+public int Top(){
+    if(output.empty()==true){
+        while(input.empty()==false){
+            output.push(input.pop());
+        }}
+        int x=(int)output.peek();
+  return x ;
+}
+
+public int size(){
+    return input.size()+output.size();
+}
+}
+
+
+//Using LL
+
+public class Queue_imp_LL {
+    public static void main(String[] args){
+ Queue q=new Queue();
+ System.out.println(q.Isempty());
+ q.enquq(1);
+ q.dequeue();
+ q.enquq(2);
+ q.enquq(3);
+ q.enquq(4);
+ q.enquq(6);
+ q.enquq(7);
+ System.out.println(q.dequeue());
+ System.out.println(q.dequeue());
+ System.out.println("Top " +q.top());
+ System.out.println("Size   "+q.size());
+ System.out.println(q.dequeue()+"   "+q.dequeue());
+ System.out.println("Empty  "+q.Isempty());
+    }
+}
+
+class Queue{
+private class sNode{
+    int d;
+    sNode next;
+    sNode(int d){
+        this.d=d;
+        this.next=null;
+    }
+}
+sNode Front=null,Rear=null;
+int size=0;
+public void enquq(int x){
+ sNode node=new sNode(x);
+    if(Front==null){
+    Front=node;
+    Rear=node;
+    }
+else{
+    Rear.next=node;
+    Rear=node;
+}
+System.out.println("element Pushed");
+size++;
+}
+public int dequeue(){
+    if(Front==null){
+        System.out.println("empty ");
+        return -1;
+    }
+    int d=Front.d;
+   Front=Front.next;
+   size--;
+    return d;
+}
+public int size(){
+    return size;
+}
+public boolean Isempty(){
+return Front==null;
+}
+public int top(){
+    return Front.d;
+}
+}
