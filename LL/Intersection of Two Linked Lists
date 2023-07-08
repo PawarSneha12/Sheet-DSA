@@ -1,0 +1,49 @@
+//Intersection of Two Linked Lists
+
+TC:---- O(2*max(length of list1,length of list2))
+
+public class Solution {
+    public static int findIntersection(Node firstHead, Node secondHead) {
+        while(firstHead!=null){
+            Node temp=secondHead;
+            while(temp!=null){
+                if(temp==firstHead){
+                    return firstHead.data;
+                }
+                temp=temp.next;
+            }
+            firstHead=firstHead.next;
+        }
+        return -1;
+    }
+}
+
+
+//Using HashSet
+// Time Complexity: O(n+m)
+
+      HashSet<Node> hs=new HashSet<>();
+        while(firstHead!=null){
+            hs.add(firstHead);
+            firstHead=firstHead.next;
+        }
+        while(secondHead!=null){
+           if (hs.contains(secondHead)){return secondHead.data;
+           }
+           secondHead=secondHead.next;
+        }
+        return -1;
+
+
+// Optimal approach
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode d1=headA;
+        ListNode d2=headB;
+        while(d1!=d2){
+            d1=d1==null?headB:d1.next;
+            d2=d2==null?headA:d2.next;
+        }
+       return d1; 
+    }
+}
